@@ -1,0 +1,94 @@
+{
+	"name": "lntoggle",
+	"displayName": "Line Numbers Toggle",
+	"author": "Vitalii Kravchenko <vitalyx@gmail.com>",
+	"description": "Easily toggle line numbers on and off",
+	"version": "1.0.0",
+	"keywords": [
+		"vscode",
+		"code",
+		"line",
+		"numbers",
+		"switch",
+		"toggle"
+	],
+	"homepage": "https://github.com/yay/lntoggle",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yay/lntoggle.git"
+	},
+	"bugs": {
+		"url": "https://github.com/yay/lntoggle",
+		"email": "vitalyx@gmail.com"
+	},
+	"license": "MIT",
+	"main": "./out/extension.js",
+	"scripts": {
+		"package": "yarn run compile && vsce package --yarn -o extension.vsix",
+		"compile": "tsc -p ./ && yarn minify",
+		"minify": "uglifyjs-folder -e -x .js -o out out",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
+	},
+	"engines": {
+		"yarn": ">=1",
+		"node": ">=12",
+		"vscode": "^1.42.0"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/mocha": "^8.2.2",
+		"@types/node": "^16.11.7",
+		"typescript": "^4.6.4",
+		"uglify-js": "^3.13.8",
+		"uglifyjs-folder": "^2.0.0",
+		"vsce": "^2.7.0",
+		"vscode": "^1.1.37"
+	},
+	"publisher": "yay",
+	"icon": "assets/icon.png",
+	"galleryBanner": {
+		"color": "#FAFAFA",
+		"theme": "light"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "lntoggle.show",
+				"title": "Show Line Numbers"
+			},
+			{
+				"command": "lntoggle.hide",
+				"title": "Hide Line Numbers"
+			},
+			{
+				"command": "lntoggle.toggle",
+				"title": "Toggle Line Numbers"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "lntoggle.toggle",
+				"key": "ctrl+shift+l"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Line Numbers Toggle",
+			"properties": {
+				"lntoggle.priority": {
+					"type": "number",
+					"description": "The priority for the statusbar toggle",
+					"default": 0
+				}
+			}
+		}
+	}
+}
